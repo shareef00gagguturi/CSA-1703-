@@ -1,0 +1,45 @@
+print("192311288-G.Shareef")
+import heapq
+
+GOAL = [[1,2,3],[4,5,6],[7,8,0]]
+DIRS = [(-1,0),(1,0),(0,-1),(0,1)]
+
+def manhattan(s):
+    return sum(abs(i - (v-1)//3) + abs(j - (v-1)%3)
+               for i, row in enumerate(s)
+               for j, v in enumerate(row) if v)
+
+def blank_pos(s):
+    for i in range(3):
+        for j in range(3):
+            if s[i][j] == 0: return i, j
+
+def move(s, x, y, dx, dy):
+    nx, ny = x+dx, y+dy
+    if 0 <= nx < 3 and 0 <= ny < 3:
+        ns = [r[:] for r in s]
+        ns[x][y], ns[nx][ny] = ns[nx][ny], ns[x][y]
+        return ns
+
+def a_star(start):
+    heap = [(manhattan(start), 0, start, [])]
+    seen = set()
+    while heap:
+        f, g, s, path = heapq.heappop(heap)
+        key = tuple(map(tuple, s))
+        if key in seen: continue
+        seen.add(key)
+        if s == GOAL: return path + [s]
+        x, y = blank_pos(s)
+        for dx, dy in DIRS:
+            ns = move(s, x, y, dx, dy)
+            if ns: heapq.heappush(heap, (g+1+manhattan(ns), g+1, ns, path + [s]))
+
+def print_steps(path):
+    for i, s in enumerate(path):
+        print(f"Step {i}:\n" + "\n".join(str(r) for r in s) + "\n")
+
+# Example
+start = [[1,2,3],[4,0,6],[7,5,8]]
+sol = a_star(start)
+print_steps(sol if sol else [])
