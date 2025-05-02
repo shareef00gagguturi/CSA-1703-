@@ -1,0 +1,28 @@
+print("192311288 - G.Mohammad shareef")
+from collections import deque, defaultdict
+
+def bfs(graph, start):
+    visited = set()
+    queue = deque([start])
+    print("BFS Traversal:", end=" ")
+
+    while queue:
+        vertex = queue.popleft()
+        if vertex not in visited:
+            print(vertex, end=" ")
+            visited.add(vertex)
+            queue.extend(neigh for neigh in graph[vertex] if neigh not in visited)
+
+# -------- INPUT --------
+graph = defaultdict(list)
+n = int(input("Enter number of edges: "))
+print("Enter edges (e.g. A B for edge from A to B):")
+for _ in range(n):
+    u, v = input().split()
+    graph[u].append(v)
+    graph[v].append(u)  # For undirected graph
+
+start = input("Enter the start node: ")
+
+# -------- RUN --------
+bfs(graph,start)
