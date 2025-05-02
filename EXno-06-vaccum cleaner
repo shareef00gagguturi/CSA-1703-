@@ -1,0 +1,36 @@
+print("192311288 - GMohammad shareef")
+def vacuum_cleaner(environment, initial_location):
+    actions = []
+    location = initial_location
+
+    print(f"Initial State: {environment}, Vacuum at: {location}")
+
+    if environment[location] == "Dirty":
+        actions.append("Suck")
+        environment[location] = "Clean"
+    
+    if location == "A":
+        actions.append("Move Right")
+        location = "B"
+    else:
+        actions.append("Move Left")
+        location = "A"
+
+    if environment[location] == "Dirty":
+        actions.append("Suck")
+        environment[location] = "Clean"
+
+    print(f"Final State: {environment}")
+    print(f"Actions: {actions}")
+
+# -------- INPUT --------
+# You can change the state here:
+environment = {
+    "A": "Dirty",
+    "B": "Dirty"
+}
+
+initial_location = "A"  # or "B"
+
+# -------- RUN --------
+vacuum_cleaner(environment, initial_location)
