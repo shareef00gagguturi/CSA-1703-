@@ -1,0 +1,53 @@
+print(" 192311288 - g.Shareef ")
+# Map Coloring using Backtracking (CSP)
+
+# Variables (Regions)
+regions = ['WA', 'NT', 'SA', 'Q', 'NSW', 'V', 'T']
+
+# Domains (Available colors)
+colors = ['Red', 'Green', 'Blue']
+
+# Neighbors (Constraints)
+neighbors = {
+    'WA': ['NT', 'SA'],
+    'NT': ['WA', 'SA', 'Q'],
+    'SA': ['WA', 'NT', 'Q', 'NSW', 'V'],
+    'Q': ['NT', 'SA', 'NSW'],
+    'NSW': ['Q', 'SA', 'V'],
+    'V': ['SA', 'NSW'],
+    'T': []
+}
+
+# Store result
+assignment = {}
+
+# Check if color can be assigned to region
+def is_valid(region, color):
+    for neighbor in neighbors[region]:
+        if neighbor in assignment and assignment[neighbor] == color:
+            return False
+    return True
+
+# Backtracking function
+def csp_backtrack(index=0):
+    if index == len(regions):
+        return True
+
+    region = regions[index]
+    for color in colors:
+        if is_valid(region, color):
+            assignment[region] = color
+            if csp_backtrack(index + 1):
+                return True
+            # Backtrack
+            del assignment[region]
+
+    return False
+
+# Solve the problem
+if csp_backtrack():
+    print("Map Coloring Solution:")
+    for region in regions:
+        print(f"{region}: {assignment[region]}")
+else:
+    print("No solution found.")
