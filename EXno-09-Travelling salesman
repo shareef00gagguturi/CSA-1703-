@@ -1,0 +1,28 @@
+print(" 192311288 - G.shareef ")
+from itertools import permutations
+
+def tsp(graph, start):
+    cities = list(graph.keys())
+    cities.remove(start)
+    min_path = float('inf')
+    best_route = []
+    for perm in permutations(cities):
+        cost = 0
+        current = start
+        for city in perm:
+            cost += graph[current][city]
+            current = city
+        cost += graph[current][start]
+        if cost < min_path:
+            min_path = cost
+            best_route = perm
+    print(f"Minimum cost: {min_path}")
+    print("Best route:", start, "->", " -> ".join(best_route), "->", start)
+
+graph = {
+    'A': {'B': 2, 'C': 9, 'D': 10},
+    'B': {'A': 1, 'C': 6, 'D': 4},
+    'C': {'A': 15, 'B': 7, 'D': 8},
+    'D': {'A': 6, 'B': 3, 'C': 12}
+}
+tsp(graph, 'A')
