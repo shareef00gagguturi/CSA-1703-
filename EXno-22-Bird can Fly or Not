@@ -1,0 +1,27 @@
+% bird_can_fly.pl
+
+% Facts: birds and whether they can fly or not
+bird(canary, yes).
+bird(peacock, yes).
+bird(penguin, no).
+bird(ostrich, no).
+
+% Print whether a bird can fly or not
+can_fly(Bird) :-
+    bird(Bird, yes),
+    write(Bird), write(' can fly.'), nl.
+
+can_fly(Bird) :-
+    bird(Bird, no),
+    write(Bird), write(' cannot fly.'), nl.
+
+% Entry point
+:- initialization(main).
+
+main :-
+    write('192311288 - G.shareef'), nl,
+    write('Checking if birds can fly or not:'), nl,
+    can_fly(canary),
+    can_fly(peacock),
+    can_fly(penguin),
+    can_fly(ostrich).
