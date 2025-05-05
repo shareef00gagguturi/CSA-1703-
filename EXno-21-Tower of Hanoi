@@ -1,0 +1,21 @@
+% towers_of_hanoi.pl
+
+% The base case of moving one disk
+move(1, A, B, _) :-
+    write('Move disk 1 from '), write(A), write(' to '), write(B), nl.
+
+% Move n disks from A to B using C as auxiliary
+move(N, A, B, C) :-
+    N > 1,
+    N1 is N - 1,
+    move(N1, A, C, B), % Move N-1 disks from A to C using B
+    move(1, A, B, _),  % Move the nth disk from A to B
+    move(N1, C, B, A). % Move N-1 disks from C to B using A
+
+% Entry point
+:- initialization(main).
+
+main :-
+    write('192311288 - G.shareef'), nl,
+    write('Solving Towers of Hanoi with 3 disks: '), nl,
+    move(3, 'A', 'C', 'B'). % Move 3 disks from peg A to peg C using peg B
