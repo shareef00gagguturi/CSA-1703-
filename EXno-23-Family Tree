@@ -1,0 +1,30 @@
+% family_tree.pl
+
+% Facts: Father and Mother relationships
+father(john, mike).  % John is Mike's father
+father(mike, tom).  % Mike is Tom's father
+father(mike, lisa). % Mike is Lisa's father
+
+mother(susan, mike). % Susan is Mike's mother
+mother(jane, tom).   % Jane is Tom's mother
+mother(anna, lisa).  % Anna is Lisa's mother
+
+% Rules: To find out if someone is a parent
+parent(X, Y) :-
+    father(X, Y);
+    mother(X, Y).
+
+% To find the grandparent relationship
+grandparent(X, Y) :-
+    parent(X, Z),
+    parent(Z, Y).
+
+% Entry point
+:- initialization(main).
+
+main :-
+    write('192311288 - G.shareef'), nl,
+    write('Family Tree:'), nl,
+    write('Mike\'s father: '), father(Father, mike), write(Father), nl,
+    write('Tom\'s mother: '), mother(Mother, tom), write(Mother), nl,
+    write('Tom\'s grandparent: '), grandparent(Grandparent, tom), write(Grandparent), nl.
