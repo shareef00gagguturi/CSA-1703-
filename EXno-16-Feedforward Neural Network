@@ -1,0 +1,36 @@
+print(" 192311288 - G.shareef")
+import math
+
+# 🔢 Sigmoid activation function
+def sigmoid(x):
+    return 1 / (1 + math.exp(-x))
+
+# 🔁 Derivative of sigmoid (for training, not used here)
+def sigmoid_derivative(x):
+    return x * (1 - x)
+
+# 🚀 Forward pass through the network
+def feedforward(x1, x2):
+    # 🎯 Input to hidden layer (2 neurons)
+    hidden1_input = x1 * 0.1 + x2 * 0.2
+    hidden2_input = x1 * 0.3 + x2 * 0.4
+
+    # 🔥 Apply activation
+    hidden1_output = sigmoid(hidden1_input)
+    hidden2_output = sigmoid(hidden2_input)
+
+    # 🔄 Hidden to output layer
+    output_input = hidden1_output * 0.5 + hidden2_output * 0.6
+    output = sigmoid(output_input)
+
+    return output
+
+# 📥 Input from user
+x1 = float(input("Enter input x1: "))
+x2 = float(input("Enter input x2: "))
+
+# ✅ Run the feedforward network
+output = feedforward(x1, x2)
+
+# 🎉 Show result
+print("\n🔍 Output of Feedforward Neural Network:", round(output, 4))
