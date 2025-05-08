@@ -1,0 +1,17 @@
+at(banana, shelf),
+    retract(at(banana, shelf)),
+    write('Monkey grabs the banana.'), nl.
+
+% Rule: Complete task - Monkey climbs, reaches, and grabs the banana
+get_banana :-
+    climb_on_stool,
+    reach_banana,
+    grab_banana.
+
+% Entry point
+:- initialization(main).
+
+main :-
+    write('192311288-G.shareef'), nl,
+    write('Monkey Banana Problem:'), nl,
+    get_banana.
