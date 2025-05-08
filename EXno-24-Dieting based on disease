@@ -1,0 +1,25 @@
+% dieting_system.pl
+
+% Facts: Relation between diseases and the recommended diet
+diet(cancer, high_protein).
+diet(diabetes, low_sugar).
+diet(hypertension, low_salt).
+diet(obesity, low_calories).
+diet(arthritis, anti_inflammatory).
+
+% Rule: Suggest a diet based on the disease
+suggest_diet(Disease) :-
+    diet(Disease, Diet),
+    write('For '), write(Disease), write(', you should follow a '), write(Diet), write(' diet.'), nl.
+
+% Entry point
+:- initialization(main).
+
+main :-
+    write('192311288-G.shareef'), nl,
+    write('Dieting System Based on Disease:'), nl,
+    suggest_diet(cancer),
+    suggest_diet(diabetes),
+    suggest_diet(hypertension),
+    suggest_diet(obesity),
+    suggest_diet(arthritis).
