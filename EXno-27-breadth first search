@@ -1,0 +1,15 @@
+% Find the best neighbor based on the heuristic value
+best_neighbors(Neighbors, Best) :-
+    findall(Heuristic-Node, (member(Node, Neighbors), heuristic(Node, Heuristic)), HeuristicList),
+    sort(HeuristicList, Sorted),  % Sort neighbors based on heuristic value
+    Sorted = [_-Best | _],   % Get the best node
+    !.  % Once we have the best, stop further processing
+
+% Entry point: Initiating the Best First Search algorithm
+:- initialization(main).
+
+main :-
+    write('192311288 - G.shareef'), nl,
+    write('Best First Search Algorithm: Finding the shortest path from a start node to a goal node'), nl,
+    best_first_search(a, f, Path),
+    write('Path found: '), write(Path), nl.
