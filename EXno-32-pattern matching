@@ -1,0 +1,11 @@
+% 192311288-G.shareef
+% Pattern Matching Example
+
+match([a, b, c]).
+match([a, X, c]) :- write('Matched pattern with variable X = '), write(X), nl.
+
+:- initialization(main).
+
+main :-
+    write('192311288-G.shareef'), nl,
+    match([a, b, c]).
