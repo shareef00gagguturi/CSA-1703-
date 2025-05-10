@@ -1,0 +1,37 @@
+% Define your registration number and name printing rule
+print_info :-
+    write('192311288 - G.shareef'), nl.
+
+% Facts: Possible diseases based on symptoms
+disease(john, flu).
+disease(jane, cold).
+disease(bob, fever).
+disease(alice, flu).
+
+% Symptoms: Define symptoms associated with each disease
+symptom(flu, cough).
+symptom(flu, fever).
+symptom(cold, runny_nose).
+symptom(cold, sore_throat).
+symptom(fever, chills).
+symptom(fever, sweating).
+
+% Rule to determine the disease based on symptoms
+diagnosis(Patient, Disease) :-
+    disease(Patient, Disease),  % Fetch the disease for the patient
+    print_info,  % Print registration number and name
+    write('Diagnosing disease for patient: '), write(Patient), nl,
+    write('The patient is diagnosed with: '), write(Disease), nl.
+
+% Main program to initiate the diagnosis
+main :-
+    diagnosis(john, What),   % Query for the patient john
+    write('Diagnosis for John: '), write(What), nl,
+    diagnosis(jane, What1),  % Query for the patient jane
+    write('Diagnosis for Jane: '), write(What1), nl,
+    diagnosis(bob, What2),   % Query for the patient bob
+    write('Diagnosis for Bob: '), write(What2), nl,
+    diagnosis(alice, What3). % Query for the patient alice
+
+% Add initialization directive to run the main predicate automatically
+:- initialization(main).
