@@ -1,0 +1,18 @@
+% 192311288 - G.shareef
+% Backward Chaining Example
+
+likes(john, pizza).
+likes(john, burger).
+likes(mary, sushi).
+
+food_lover(X) :- likes(X, pizza), likes(X, burger).
+
+:- initialization(main).
+
+main :-
+    write('192311288 - G.shareef'), nl,
+    ( food_lover(john) ->
+        write('john is a food lover'), nl
+    ;
+        write('john is not a food lover'), nl
+    ).
