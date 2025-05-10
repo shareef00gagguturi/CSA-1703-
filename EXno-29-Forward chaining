@@ -1,0 +1,17 @@
+% 192311288 - G.shareef
+% Forward Chaining Example
+
+:- initialization(main).
+
+fact(sunny).
+fact(workday).
+
+rule(go_beach) :- fact(sunny), \+ fact(workday).
+
+main :-
+    write('192311288- G.shareef'), nl,
+    ( rule(go_beach) ->
+        write('Forward chaining result: go_beach is TRUE'), nl
+    ;
+        write('Forward chaining result: go_beach is FALSE'), nl
+    ).
